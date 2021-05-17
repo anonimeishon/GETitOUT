@@ -1,58 +1,20 @@
 <script>
   import LogoIcon from "./components/LogoIcon.svelte";
-  import Card from "./components/Card.svelte"
-  let formData = { name: "", email: "", link: "" };
-
-  const handleForm = async (e) => {
-    console.log(formData);
-    formData = { name: "", email: "", link: "" };
-    e.preventDefault();
-  };
+  import CardHolder from "./components/CardHolder.svelte";
+  import InputPerson from "./components/form.svelte";
 </script>
 
 <main>
   <div class={"container"}>
     <div class="topBar"><LogoIcon height={40} width={300} /></div>
     <div class={"blocksContainer"}>
-
       <div class={"leftBlock"}>
         <h1 class={"leftBlockTitle"}>enter the data <br />to the register</h1>
 
-        <form on:submit={handleForm} class="content">
-          <div class={"formContainer"}>
-          <label>
-            <input
-              bind:value={formData.name}
-              placeholder={"User Name"}
-              type="text"
-              required
-            />
-          </label>
-          <label>
-            <input
-              bind:value={formData.email}
-              placeholder={"Email"}
-              type="text"
-              required
-            />
-          </label>
-          <label>
-            <input
-              bind:value={formData.link}
-              placeholder={"Image Link"}
-              type="text"
-              required
-            />
-          </label>
-          <button class={"formButton"} type="submit">SEND</button>
-        </div>
-        </form>
+        <InputPerson />
       </div>
-      <div class={"rightBlock"} >
-      <h1 class={"rightBlockTitle"}>
-      UPDATE <br>RECORDED DATA
-      </h1>
-      <Card/>
+      <div class={"rightBlock"}>
+        <CardHolder />
       </div>
     </div>
   </div>
@@ -73,71 +35,39 @@
   }
   .topBar {
     width: 100%;
+    min-height: 100px;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0px 12px 18px -6px rgb(66 66 66 / 20%);
-    z-index: 1;
+    z-index: 99;
   }
   .blocksContainer {
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     width: 100%;
     height: 100%;
   }
-
   .leftBlock {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
-    align-items: center;
     background-color: #000000;
-    width: 50%;
-  }  
-
-  .leftBlockTitle {
-    margin-bottom: 50px;
-    word-spacing: 5px;
-    letter-spacing: 5px;
-    margin-top:80px;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
-    font-size: 3em;
-  }
-  .formContainer{
-    display:flex;
-    flex-direction: column;
-    /* justify-content: space-around; */
     align-items: center;
-    height:320px;
-  }
-  input {
-    background-color: black;
-    color: white;
-    width:400px;
-    height: 55px;
-    margin-top: 20px;
-  }
-  ::placeholder{
-    color:white;
-    opacity: 80%;
-    padding-left:10px;
-  }
-  .formButton{
-    color:black;
-    font-weight: bold;
-    background-color:white;
-    margin-top: 50px;
-    cursor: pointer;
-    padding: 0.8rem 4.5rem;
-    font-size: 1.6rem;
+    position: relative;
+    width: 50%;
+    /* min-width: 700px; */
   }
   .rightBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #ffffff;
     width: 50%;
     position: relative;
+    overflow: hidden;
+    /* min-width: 700px; */
   }
   .rightBlock::before {
     content: "";
@@ -151,12 +81,12 @@
     border-right: solid 40px white;
     border-bottom: solid 23px transparent;
   }
-  .rightBlockTitle {
+  .leftBlockTitle {
     margin-bottom: 50px;
     word-spacing: 5px;
     letter-spacing: 5px;
-    margin-top:80px;
-    color: #000000;
+    margin-top: 80px;
+    color: #ffffff;
     text-transform: uppercase;
     font-family: "Montserrat", sans-serif;
     font-size: 3em;
@@ -164,12 +94,37 @@
   main {
     text-align: center;
     margin: 0 auto;
+    max-width: none;
   }
-
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+  @media screen and (max-width: 768px){
+    .leftBlock{
+      width: 100%;
+      min-height: calc(100vh - 100px);
     }
+    .rightBlock{
+      width: 100%;
+      min-height: calc(100vh - 100px);
+
+    }
+    .topBar{
+      position:sticky;
+    }
+    .blocksContainer{
+      flex-direction: column;
+      align-items: center;
+    }
+    .rightBlock::before {
+    transform: translateY();
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 45%;
+    width: 0;
+    height: 0;
+    border-left:solid 40px transparent;
+    border-right: solid 40px transparent;
+    border-bottom: solid 40px white;
+  }
+    
   }
 </style>

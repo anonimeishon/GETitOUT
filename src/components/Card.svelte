@@ -6,35 +6,55 @@
 </script>
 
 <div class={"card"}>
-  <img src={link} alt={"Image Link"} />
+  <img class={"image"} src={link} alt={"Image Link"} />
   <div class={"cardText"}>
-    <h1 class={"name"}>{name}</h1>
+    <p class={"name"}>{name}</p>
     <p class={"email"}>{email}</p>
   </div>
 </div>
 
 <style>
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .image{
+    border-radius: 10px 10px 0 0;
+    width: 270px;
+    height:160px;
+    pointer-events: none;
+    object-fit:cover;
+  }
   .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 400px;
+    /* justify-content: center; */
+    width: 270px;
     height: 250px;
-    background-color: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+    pointer-events: none;
+    /* background-color: black; */
   }
-  .cardText {
-    display: flex;
+.cardText{
+    display:flex;
     flex-direction: column;
-    justify-items: space-between;
-    align-content: center;
-  }
+    justify-content: center;
+    /* height: 100%; */
+    height: 90px;
+    pointer-events: none;
+
+}
   .name {
     text-transform: capitalize;
     font-family: "Montserrat", sans-serif;
+    font-size: 1.7rem;
+    font-weight: bold;
+    /* margin-top: 1rem; */
   }
   .email {
     text-transform: lowercase;
+    margin-top: 0.5rem;
   }
-
 </style>
