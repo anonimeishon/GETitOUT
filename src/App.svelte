@@ -57,6 +57,7 @@
     align-items: center;
     position: relative;
     width: 50%;
+    z-index: 2;
     /* min-width: 700px; */
   }
   .rightBlock {
@@ -66,7 +67,6 @@
     background-color: #ffffff;
     width: 50%;
     position: relative;
-    overflow: hidden;
     /* min-width: 700px; */
   }
   .rightBlock::before {
@@ -80,6 +80,7 @@
     border-top: solid 23px transparent;
     border-right: solid 40px white;
     border-bottom: solid 23px transparent;
+    z-index: 3;
   }
   .leftBlockTitle {
     margin-bottom: 50px;

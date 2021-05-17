@@ -67,7 +67,7 @@
     element.addEventListener("mouseup", mouseUpHandler);
   };
 </script>
-
+<div class={"container"}>
 <div
   class={"wrapper"}
   bind:this={element}
@@ -81,7 +81,6 @@
   {#await peopleData}
     <div class={"spinner"}><LoadingSpinner /></div>
   {:then data}
-    <div class={"GridBlurWrapper"}>
       <div id="grid" class={"grid"}>
         {#each data as person}
           <div>
@@ -89,8 +88,6 @@
           </div>
         {/each}
       </div>
-      <div class={"gridBlur"} />
-    </div>
   {:catch error}
     <div class={'error'}>{error}</div>
   {/await}
@@ -105,7 +102,7 @@
     <button on:click={handleClick} class={"updateButton"}> UPDATE </button>
   {/await}
 </div>
-
+</div>
 <style>
   .spinner {
     margin-bottom: 2rem;
@@ -113,10 +110,17 @@
   .error {
     color: red;
   }
+  .container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    height:100%;
+    width:100%;
+    /* justify-content: space-around; */
+  }
   .blurDiv {
-    position: absolute;
-    bottom: 0%;
-    padding-bottom: 14.5rem;
+    z-index: 1;
+    flex:1;
     width: 100%;
     box-shadow: 0px -5px 40px #e5e5e5;
     background: rgb(229, 229, 229);
@@ -138,11 +142,7 @@
   .wrapper::-webkit-scrollbar {
     display: none;
   }
-  .GridBlurWrapper {
-    height: fit-content;
-    width: 100%;
-    position: relative;
-  }
+
   .grid {
     background-color: white;
     display: grid;
@@ -158,22 +158,7 @@
       grid-template-columns: 1fr;
       justify-items: center;
     }
-  }
-  .gridBlur {
-    z-index: 99;
-    position: absolute;
-    pointer-events: none;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      #e5e5e5
-    );
-    height: 4rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  .rightBlockTitle {
+  }  .rightBlockTitle {
     margin-bottom: 50px;
     word-spacing: 5px;
     letter-spacing: 5px;
