@@ -5,7 +5,7 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import dotenv from "dotenv";
-
+import sveltePreprocess from 'svelte-preprocess';
 dotenv.config(); // inject the content of the .env file into 'process.env'
 const production = !process.env.ROLLUP_WATCH;
 
@@ -47,7 +47,15 @@ export default {
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production,
-      }
+      },
+      preprocess:
+        sveltePreprocess({
+          replace: [["process.env.API_KEY", process.env.API_KEY],
+          ["proccess.env.PROJECT_ID", process.env.PROJECT_ID], 
+          ["process.env.STORAGE_BUCKET", process.env.STORAGE_BUCKET],
+          ["process.env.APP_ID", process.env.APP_ID]],
+        })
+
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance

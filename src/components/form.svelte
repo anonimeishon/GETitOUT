@@ -18,7 +18,7 @@
   const handleForm = async (e) => {
     e.preventDefault();
     promise = addPerson(formData);
-    // formData = { name: "", email: "", link: "" };
+    formData = { name: "", email: "", link: "" };
   };
 </script>
 
@@ -53,7 +53,10 @@
         <DotLoading black={true} />
       </button>
     {:then done}
-      <button class={"formButton"} type="submit"> SEND </button>
+    <button class={"formButton"} type="submit"> SEND </button>
+    {:catch error}
+    <div>{error}</div>
+    <button class={"formButton"} type="submit"> SEND </button>
     {/await}
   </div>
 </form>
