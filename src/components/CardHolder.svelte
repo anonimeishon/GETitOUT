@@ -1,12 +1,10 @@
 <script>
   import Card from "./Card.svelte";
-  import { db } from "../util/firebase";
+  import { db } from "../util/firebase.js";
   import LoadingSpinner from "./Spinner.svelte";
-  import DotLoading from "./DotLoading.svelte";
   // import { collectionData } from "rxfire/firestore";
   // import { startWith } from "rxjs/operators";
   import { onMount } from "svelte";
-  import App from "../App.svelte";
 
   // This updates the data in real time
 
@@ -14,6 +12,8 @@
   // const peopleData = collectionData(query).pipe(startWith([]));
 
   // Using this one to give functionality to the update button
+  
+  /** getPeople - Contains fetched data from firebase*/
   let peopleData = [];
   const getPeople = async () => {
     const query = await db.collection("People").limit(10).get();
@@ -92,7 +92,7 @@
       <div class={"gridBlur"} />
     </div>
   {:catch error}
-    <div>{error}</div>
+    <div class={'error'}>{error}</div>
   {/await}
 </div>
 <div class={"blurDiv"}>
@@ -100,12 +100,18 @@
     <button disabled class={"updateButton"}> UPDATE </button>
   {:then done}
     <button on:click={handleClick} class={"updateButton"}> UPDATE </button>
+  {:catch error}
+    <div class={"error"}>{error}</div>
+    <button on:click={handleClick} class={"updateButton"}> UPDATE </button>
   {/await}
 </div>
 
 <style>
   .spinner {
     margin-bottom: 2rem;
+  }
+  .error {
+    color: red;
   }
   .blurDiv {
     position: absolute;
